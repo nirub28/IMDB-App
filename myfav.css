@@ -1,0 +1,11 @@
+body{
+  background-color: gray;
+}
+
+.favorite-button{
+    color :black;
+    height: 100px;
+    height:50px;
+    left:50%;
+    border: 1px solid red;
+}
