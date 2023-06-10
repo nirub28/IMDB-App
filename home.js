@@ -38,6 +38,7 @@ function removeFromFavorites(imdbID) {
   localStorage.setItem("favoriteMovies", JSON.stringify(updatedMovies));
 }
 
+
 // function displayFavoriteMovies() {
 //   var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
   
@@ -75,6 +76,11 @@ function searchMovies(input) {
           posterImg.src = poster;
           posterImg.alt = title + "Poster";
           posterImg.classList.add("poster-image"); // Create movie details elements
+
+
+          var linktag = document.createElement("a"); //n
+          linktag.href="./movie.html?id=" + imdbID ;
+          linktag.classList.add('a-tag');           //n
           
           var titleElement = document.createElement("span");
           titleElement.textContent = title + " (" + year + ")";
@@ -108,9 +114,10 @@ function searchMovies(input) {
             //displayFavoriteMovies();
           });
           
+          linktag.appendChild(titleElement)//n
 
           containerDiv.appendChild(posterImg);
-          containerDiv.appendChild(titleElement);
+          containerDiv.appendChild(linktag); //n
           containerDiv.appendChild(favoriteButton); // Append movie result container to the search results container
           resultsContainer.appendChild(containerDiv);
           
