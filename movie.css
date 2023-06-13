@@ -1,0 +1,61 @@
+   .movie-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .container-div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    padding: 20px;
+  }
+
+  .poster-image {
+    height: 300px;
+    width: auto;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .details {
+    margin-bottom: 10px;
+  }
+  .director,
+  .imdbrating,
+  .runtime,
+  .genre,
+  .plot,
+  .writer,
+  .actors,
+  .language,
+  .country,
+  .box-office {
+    margin-bottom: 5px;
+    /* font-size: 0.9rem; */
+  } 
+
+  .leftDiv{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 700px;
+  }
+
+  .runtime{
+    font-weight: 100;
+  }
+    
+
+.plot{
+  margin-left: 10px;;
+}  

@@ -2,6 +2,7 @@ console.log("Testing...");
 
 var inputElement = document.querySelector(".movie-search");
 var resultsContainer = document.querySelector(".search-results");
+var existingMovie= false;
 
 inputElement.addEventListener("keyup", function (event) {
   var input = event.target.value;
@@ -80,23 +81,24 @@ function searchMovies(input) {
 
           var linktag = document.createElement("a"); //n
           linktag.href="./movie.html?id=" + imdbID ;
-          linktag.classList.add('a-tag');           //n
+          linktag.classList.add('a-tag');  
+          linktag.target = "_blank";
           
           var titleElement = document.createElement("span");
           titleElement.textContent = title + " (" + year + ")";
           titleElement.classList.add("title");
 
           var favoriteButton = document.createElement("button");
-
+                 
           
           var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-          var existingMovie = favoriteMovies.find(movie => movie.imdbID === imdbID);
+              existingMovie = favoriteMovies.find(movie => movie.imdbID === imdbID);
 
 
           if (existingMovie) {
-            favoriteButton.textContent = "Unfavorite";
+            favoriteButton.textContent = "UnFavourite";
           } else {
-            favoriteButton.textContent = "Favorite";
+            favoriteButton.textContent = "Favourite";
           }
 
           favoriteButton.value = imdbID;
@@ -105,10 +107,10 @@ function searchMovies(input) {
           favoriteButton.addEventListener("click", function () {
             if (existingMovie) {
               removeFromFavorites(imdbID);
-              favoriteButton.textContent = "Favorite";
+              favoriteButton.textContent = "Favourite";
             } else {
               addToFavorites(imdbID);
-              favoriteButton.textContent = "Unfavorite";
+              favoriteButton.textContent = "Unfavourite";
             }
 
             //displayFavoriteMovies();

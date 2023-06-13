@@ -54,22 +54,24 @@ function getMovieDetails(imdbID) {
              posterImg.alt = title + "Poster";
              posterImg.classList.add("poster-image"); 
 
+             var flexContainer = document.createElement("div");
+             flexContainer.classList.add("flex-div");
 
              var titleElement = document.createElement("span");
              titleElement.textContent = title + " (" + year + ")";
              titleElement.classList.add("title");
 
              var directorElement = document.createElement("span");
-             directorElement.textContent = Director;
+             directorElement.textContent = 'Director:-' + " " + Director;
              directorElement.classList.add("director");
 
              var imdbrating = document.createElement("span");
-             imdbrating.textContent = imdbRating;
+             imdbrating.textContent ='IMDB Rating:' + " " + imdbRating;
              imdbrating.classList.add("imdbrating");
 
 
              var favoriteButton = document.createElement("button");
-             favoriteButton.textContent = "Unfavorite";
+             favoriteButton.textContent = "UnFavourite";
              favoriteButton.value =imdbID;
              favoriteButton.classList.add("favorite-button");
 
@@ -78,11 +80,13 @@ function getMovieDetails(imdbID) {
                   favoriteButton.textContent = "Favorite";  
               });
             
-             favMovieDiv.appendChild(posterImg);
-             favMovieDiv.appendChild(titleElement);
-             favMovieDiv.appendChild(directorElement);
-             favMovieDiv.appendChild(imdbrating);
+              favMovieDiv.appendChild(posterImg);
+             flexContainer.appendChild(titleElement);
+             flexContainer.appendChild(directorElement);
+             flexContainer.appendChild(imdbrating);
              favMovieDiv.appendChild(favoriteButton);
+             favMovieDiv.appendChild(flexContainer);
+             
 
 
              containerDiv.appendChild(favMovieDiv);
