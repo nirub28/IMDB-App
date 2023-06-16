@@ -2,7 +2,7 @@ console.log("Testing fav tab");
 
 var containerDiv = document.querySelector(".container");
 
-getFavMovies();
+getFavMovies();  // load all fav  movies in LS
 
 function getFavMovies() {
   var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
@@ -17,6 +17,7 @@ function getFavMovies() {
   }
 }
 
+//to remove movie from local storage
 function removeFromFavorites(imdbID) {
     var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
     var updatedMovies = favoriteMovies.filter(movie => movie.imdbID !== imdbID);

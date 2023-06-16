@@ -1,12 +1,11 @@
 console.log("Movie Page is loading");
 
-var urlParams = new URLSearchParams(window.location.search);
-var imdbID = urlParams.get("id");
+var urlParams = new URLSearchParams(window.location.search); // to get url 
+var imdbID = urlParams.get("id");  // extract id out of url
 
 var containerDiv = document.querySelector(".movie-container");
 
 getMovieDetails(imdbID);
-//containerDiv.innerHTML = "";
 
 function getMovieDetails(imdbID) {
   var URL = "https://www.omdbapi.com/?apikey=3ca5df7&i=" + imdbID;

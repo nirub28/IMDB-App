@@ -2,7 +2,7 @@ console.log("Testing...");
 
 var inputElement = document.querySelector(".movie-search");
 var resultsContainer = document.querySelector(".search-results");
-var existingMovie= false;
+var existingMovie = false;
 
 inputElement.addEventListener("keyup", function (event) {
   var input = event.target.value;
@@ -12,16 +12,17 @@ inputElement.addEventListener("keyup", function (event) {
   }
 
   if (event.keyCode === 13) {
-    inputElement.value = "";  // clear input box
+    inputElement.value = ""; // clear input box
   }
 });
 
+// to add movie to local storage
 function addToFavorites(imdbID) {
   var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-  var existingMovie = favoriteMovies.find(movie => movie.imdbID === imdbID);
+  var existingMovie = favoriteMovies.find((movie) => movie.imdbID === imdbID);
 
   if (existingMovie) {
-    favoriteMovies = favoriteMovies.filter(movie => movie.imdbID !== imdbID);
+    favoriteMovies = favoriteMovies.filter((movie) => movie.imdbID !== imdbID);
   } else {
     var movie = {
       imdbID: imdbID,
@@ -32,28 +33,13 @@ function addToFavorites(imdbID) {
   localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
 }
 
-
+//to remove movie from local storage
 function removeFromFavorites(imdbID) {
   var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-  var updatedMovies = favoriteMovies.filter(movie => movie.imdbID !== imdbID);
+  var updatedMovies = favoriteMovies.filter((movie) => movie.imdbID !== imdbID);
   localStorage.setItem("favoriteMovies", JSON.stringify(updatedMovies));
 }
 
-
-// function displayFavoriteMovies() {
-//   var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-  
-//   favoriteMovies.forEach((movie) => {
-//     var imdbID = movie.imdbID;
-//     var favoriteButton = document.querySelector(`button[value="${imdbID}"]`);
-    
-//     if (favoriteButton) {
-//       favoriteButton.textContent = "Unfavorite";
-//     }
-//   });
-// }
-
- 
 function searchMovies(input) {
   var URL = "https://www.omdbapi.com/?apikey=3ca5df7&s=" + input;
 
@@ -76,35 +62,41 @@ function searchMovies(input) {
           var posterImg = document.createElement("img");
           posterImg.src = poster;
           posterImg.alt = title + "Poster";
-          posterImg.classList.add("poster-image"); // Create movie details elements
+          posterImg.classList.add("poster-image"); 
 
-
-          var linktag = document.createElement("a"); //n
-          linktag.href="./movie.html?id=" + imdbID ;
-          linktag.classList.add('a-tag');  
+          var linktag = document.createElement("a"); 
+          linktag.href = "./movie.html?id=" + imdbID;
+          linktag.classList.add("a-tag");
           linktag.target = "_blank";
-          
+
           var titleElement = document.createElement("span");
           titleElement.textContent = title + " (" + year + ")";
           titleElement.classList.add("title");
 
           var favoriteButton = document.createElement("button");
-                 
-          
-          var favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-              existingMovie = favoriteMovies.find(movie => movie.imdbID === imdbID);
 
-
-          if (existingMovie) {
-            favoriteButton.textContent = "UnFavourite";
-          } else {
-            favoriteButton.textContent = "Favourite";
+          function checkingFavMovies() {    // to check if movie is already in favourite
+            var favoriteMovies =
+              JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+            existingMovie = favoriteMovies.find(
+              (movie) => movie.imdbID === imdbID
+            );
           }
+
+          (() => {
+            checkingFavMovies();
+            if (existingMovie) {
+              favoriteButton.textContent = "UnFavourite";
+            } else {
+              favoriteButton.textContent = "Favourite";
+            }
+          })();
 
           favoriteButton.value = imdbID;
           favoriteButton.classList.add("favorite-button");
 
           favoriteButton.addEventListener("click", function () {
+               checkingFavMovies(); 
             if (existingMovie) {
               removeFromFavorites(imdbID);
               favoriteButton.textContent = "Favourite";
@@ -113,16 +105,14 @@ function searchMovies(input) {
               favoriteButton.textContent = "Unfavourite";
             }
 
-            //displayFavoriteMovies();
           });
-          
-          linktag.appendChild(titleElement)//n
+
+          linktag.appendChild(titleElement); 
 
           containerDiv.appendChild(posterImg);
-          containerDiv.appendChild(linktag); //n
+          containerDiv.appendChild(linktag); 
           containerDiv.appendChild(favoriteButton); // Append movie result container to the search results container
           resultsContainer.appendChild(containerDiv);
-          
         });
       } //else { //     console.log('Error:', data.Error); // }
     })
