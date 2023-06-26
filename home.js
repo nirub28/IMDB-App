@@ -65,7 +65,7 @@ function searchMovies(input) {
           posterImg.classList.add("poster-image"); 
 
           var linktag = document.createElement("a"); 
-          linktag.href = "./movie.html?id=" + imdbID;
+          linktag.href = "./Movie.html?id=" + imdbID;
           linktag.classList.add("a-tag");
           linktag.target = "_blank";
 
